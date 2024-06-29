@@ -40,6 +40,11 @@ update_packages() {
         sudo apt-get clean 2>&1 | tee -a $LOGFILE
       fi
       ;;
+    Darwin)
+      brew update 2>&1 | tee -a $LOGFILE
+      brew upgrade 2>&1 | tee -a $LOGFILE
+      brew cleanup 2>&1 | tee -a $LOGFILE
+      ;;
     *)
       echo "Unsupported OS: $OS $VER" | tee -a $LOGFILE
       exit 1
