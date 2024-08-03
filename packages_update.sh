@@ -63,3 +63,4 @@ update_packages() {
 # Main script execution
 detect_os
 update_packages
+
