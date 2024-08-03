@@ -12,28 +12,10 @@ detect_os() {
   fi
 }
 
-# Function to detect the user's shell
-detect_shell() {
-  SHELL_NAME=$(basename "$SHELL")
-  SHELL_PROFILE=""
-  case "$SHELL_NAME" in
-    bash)
-      SHELL_PROFILE=".bash_profile"
-      ;;
-    zsh)
-      SHELL_PROFILE=".zprofile"
-      ;;
-    *)
-      echo "Unsupported shell: $SHELL_NAME"
-      exit 1
-      ;;
-  esac
-}
-
 # Function to update packages and handle logging
 update_packages() {
   LOGFILE="$HOME/update.log"
-
+  
   case "$OS" in
     centos)
       if [ "$VER" == "7" ]; then
@@ -79,15 +61,5 @@ update_packages() {
 }
 
 # Main script execution
-main() {
-  detect_os
-  detect_shell
-
-  if [[ "$OS" == "Darwin" ]]; then
-    $SHELL -c "source ~/$SHELL_PROFILE; update_packages"
-  else
-    echo "$SSH_PASS" | sudo -S $SHELL -c "source ~/$SHELL_PROFILE; update_packages"
-  fi
-}
-
-main
+detect_os
+update_packages
