@@ -79,11 +79,15 @@ update_packages() {
 }
 
 # Main script execution
-detect_os
-detect_shell
+main() {
+  detect_os
+  detect_shell
 
-if [[ "$OS" == "Darwin" ]]; then
-  $SHELL -c "source ~/$SHELL_PROFILE; update_packages"
-else
-  echo "$SSH_PASS" | sudo -S $SHELL -c "source ~/$SHELL_PROFILE; update_packages"
-fi
+  if [[ "$OS" == "Darwin" ]]; then
+    $SHELL -c "source ~/$SHELL_PROFILE; update_packages"
+  else
+    echo "$SSH_PASS" | sudo -S $SHELL -c "source ~/$SHELL_PROFILE; update_packages"
+  fi
+}
+
+main
