@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'TARGET_IP', defaultValue: '', description: 'Target IP/Hostname:\nEnter the IP address or hostname of the target VM', trim: true)
+        string(name: 'TARGET_IP', defaultValue: 'drow-ubuntu', description: 'Target IP/Hostname:\nEnter the IP address or hostname of the target VM', trim: true)
     }
 
     environment {
